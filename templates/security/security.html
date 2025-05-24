@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>Security</title>
+
+<div class="container mt-4">
+    <h1 class="text-center">Security</h1>
+
+    <!-- User Registration and Login Event Log -->
+    <div class="mt-5">
+        <h4>User Registration and Login Event Log</h4>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Account No.</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Registered</th>
+                    <th scope="col">Latest Login</th>
+                    <th scope="col">Previous Login</th>
+                    <th scope="col">Latest IP</th>
+                    <th scope="col">Previous IP</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.user.get_id() }}</td>
+                    <td>{{ log.user.email }}</td>
+                    <td>{{ log.user.role }}</td>
+                    <td>{{ log.registration }}</td>
+                    <td>{{ log.latest_login }}</td>
+                    <td>{{ log.previous_login }}</td>
+                    <td>{{ log.latest_ip }}</td>
+                    <td>{{ log.previous_ip }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- User Event Log -->
+    <div class="mt-5">
+        <h4>User Event Log</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="bg-dark text-white">
+                        <th>Last 10 Security Log Entries</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in log_lines %}
+                    <tr>
+                        <td>{{ log }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

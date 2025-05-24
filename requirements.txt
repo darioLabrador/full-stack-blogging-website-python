@@ -1,0 +1,25 @@
+# Flask Framework Packages
+click
+Flask~=3.0.3
+itsdangerous
+Jinja2
+MarkupSafe
+Werkzeug
+
+# Flask Functionality Packages
+Flask-Login
+Flask-Migrate~=4.0.7
+Flask-Script
+Flask-SQLAlchemy
+Flask-WTF
+Flask-Admin
+WTForms
+SQLAlchemy~=2.0.35
+Flask-Limiter
+pyotp
+flask-qrcode
+argon2-cffi
+cryptography
+email_validator
+python-dotenv
+Flask-Talisman

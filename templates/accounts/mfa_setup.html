@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>CSC2031</title>
+<div class="container">
+    <h1>Multi-Factor Authentication Setup</h1>
+    <div class="p-2 row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div>
+                <p>Before you log-in, please set-up MFA in your account:</p>
+                <ol>
+                    <li> Install/Open Microsoft Authenticator in your mobile phone.</li>
+                    <li> Select "Add New Account":</li>
+                    <br>
+                </ol>
+                <h4>Enter Code: </h4>
+                <h5>{{secret}} </h5>
+                <h4>Scan QR Code:</h4>
+                <img src="{{qrcode(uri, box_size=5, border=5)}}">
+
+                <p> Once entered, proceed to <a href="/login">Login Page</a></p>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+</div>
+{% endblock %}

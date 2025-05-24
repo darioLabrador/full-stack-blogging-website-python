@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>CSC2031</title>
+<div class="container mt-4">
+    <h1>Your Account</h1>
+    <div class="card">
+        <div class="card-header">
+            Account Details
+        </div>
+        <div class="card-body">
+            {% if current_user.is_authenticated %}
+            <p><strong>Account ID:</strong> {{ current_user.id }}</p>
+            <p><strong>Email:</strong> {{ current_user.email }}</p>
+            <p><strong>First Name:</strong> {{ current_user.firstname }}</p>
+            <p><strong>Last Name:</strong> {{ current_user.lastname }}</p>
+            <p><strong>Phone No:</strong> {{ current_user.phone }}</p>
+            <h5>Posts:</h5>
+            {% if current_user.posts %}
+                <ul class="list-group">
+                    {% for post in current_user.posts %}
+                    <li class="list-group-item">
+                        <strong>{{ post.decrypt_title() }}</strong><br>
+                        <small>{{ post.timestamp }}</small><br>
+                        {{ post.content }}
+                        <div class="mt-2">
+                            <a href="{{ url_for('posts.update', id=post.id) }}" class="btn btn-outline-dark btn-sm">Update</a>
+                            <a href="{{ url_for('posts.delete', id=post.id) }}" class="btn btn-outline-dark btn-sm">Delete</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No posts found.</p>
+            {% endif %}
+            {% else %}
+            <p>You are not logged in. Please <a href="{{ url_for('accounts.login') }}">log in</a> to view your account details.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

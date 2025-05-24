@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>CSC2031</title>
+<div class="col-3"></div>
+<div class="col-6">
+    <div>
+        <h2>Login</h2>
+        <br>
+    </div>
+
+    <form method="POST">
+        <div class="p-2 bg-light border border-primary text-left" style="display: flex; justify-content: center; align-items: center;">
+                <div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}
+
+                        <div class="alert alert-{{ category }} mt-3 alert-dismissible" role="alert">
+                        {{ message }}
+
+                        {% if 'Account Locked' not in message  %}
+                            <a href="{{ url_for('accounts.login') }}">Try again</a>.
+                        {% endif %}
+
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                onclick=delete_flash(this)>
+                            <span>&times;</span>
+                        </button>
+                        </div>
+                    {% endfor %}
+                    {% endwith %}
+                </div>
+
+
+                {% if form != null %}
+                    {{ form.csrf_token() }}
+
+                        <div class="form-group">
+                            {{ form.email.label}}<span class="text-danger">*</span>
+                            {{ form.email(class="form-control") }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.password.label}}<span class="text-danger">*</span>
+                            {{ form.password(class="form-control") }}
+                        </div>
+
+
+                        <div class="form-group">{{ form.recaptcha }}</div>
+
+
+                        <div class="form-group">
+                            MFA PIN<span class="text-danger">*</span>
+                            {{ form.pin(class="form-control") }}
+                        </div>
+
+
+                        <div>{{ form.submit(class="btn btn-success") }}</div>
+                {% endif %}
+        </div>
+    </form>
+
+</div>
+<div class="col-3"></div>
+
+{% endblock %}
